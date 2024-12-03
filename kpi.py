@@ -65,7 +65,10 @@ def snr_egc(channel: float, amp: float, power_vec: float, n_power: float):
 
             amplitude = amp[ue, ap, :]
 
-            snr_vector[ue] = ((((np.sum(amplitude))**2) / num_ant) * 
+            if ((((np.sum(amplitude))**2) / num_ant) * (power_vec[ue] / n_power)**2) == 0:
+                print('zerou')
+
+            snr_vector[ue] = (((np.absolute(np.sum(amplitude))**2) / num_ant) * 
                              (power_vec[ue] / n_power)**2)
 
     return snr_vector
