@@ -36,17 +36,19 @@ for seed in range(seeds):
     # Channel coefficient
     channel, phases = generate_channel(dis, std_s, std_m, k, n, num_ue, num_ap, num_ant) 
 
+    print(channel.shape)
+
     # SNR with combination by selection
     snr = snr_sc(channel, np.ones(num_ue), power_noise(total_bandwidth))
-    snr_ = snr_egc(channel, np.ones(num_ue), power_noise(total_bandwidth))
+    snr_ = snr_egc(channel, phases, np.ones(num_ue), power_noise(total_bandwidth))
 
     total_snr_sc[:, seed] = lin2db(snr)
 
 # Plotting
-# snr_sc_ecdf = eCDF(total_snr_sc.flatten())
-# plt.plot(snr_sc_ecdf[0], snr_sc_ecdf[1])
+#snr_sc_ecdf = eCDF(total_snr_sc.flatten())
+#plt.plot(snr_sc_ecdf[0], snr_sc_ecdf[1])
 
-# plt.xlabel('SNR [dB]')
-# plt.ylabel('eCDF')
-# plt.grid()
-# plt.show()
+#plt.xlabel('SNR [dB]')
+#plt.ylabel('eCDF')
+#plt.grid()
+#plt.show()

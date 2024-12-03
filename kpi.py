@@ -54,7 +54,7 @@ def snr_egc(channel: float, phases: float, power_vec: float, n_power: float):
         Noise power [in W].
     '''
 
-    num_ue, num_ap, num_ant = channel[0].shape # refers the channel
+    num_ue, num_ap, num_ant = channel.shape # refers the channel
     snr_vector = np.zeros(num_ue)
 
     for ue in range(num_ue):
@@ -63,7 +63,7 @@ def snr_egc(channel: float, phases: float, power_vec: float, n_power: float):
 
             # DO A AP-UE ASSOCIATION (IT IS NOT D-MIMO YET)!
 
-            weights = (channel[1][ue, ap, :])**(-1)
+            weights = (phases[ue, ap, :])**(-1)
             print(weights)
 
     return snr_vector
