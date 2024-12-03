@@ -24,9 +24,9 @@ def generate_channel(distance: float, std_s: float, std_m: float,
     '''
 
     amplitude = (
-        #(np.random.lognormal(sigma = std_s, size = (num_ue, num_ap))) * # Models shadowing effect
-        (np.random.rayleigh(std_m, (num_ue, num_ap, num_ant)))**2        # Models multipath effect
-        #(k / distance**n)                                               # Models path loss effect.
+        (np.random.lognormal(sigma = std_s, size = (num_ue, num_ap))) * # Models shadowing effect
+        (np.random.rayleigh(std_m, (num_ue, num_ap, num_ant)))**2 *        # Models multipath effect
+        (k / distance**n)                                               # Models path loss effect.
     )
 
     phase = np.random.uniform(0, 2*np.pi, (num_ue, num_ap, num_ant))    # Models phase

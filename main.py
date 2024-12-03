@@ -17,7 +17,7 @@ n = 4                  # Propagation law exponent of path loss
 # Model parameters
 num_ue = 1
 num_ap = 1
-num_ant = 4
+num_ant = 16
 cov_side = 400
 total_bandwidth = 100e6
 seeds = 10000
@@ -39,13 +39,13 @@ for seed in range(seeds):
     channel, phases, amp = generate_channel(dis, std_s, std_m, k, n, num_ue, num_ap, num_ant) 
 
     # SNR with combination by selection
-    snr = snr_sc(channel, np.ones(num_ue), power_noise(total_bandwidth))
-    snr_ = snr_egc(channel, amp, np.ones(num_ue), power_noise(total_bandwidth))
-    snr__ = snr_mrc(channel, np.ones(num_ue), power_noise(total_bandwidth))
+    sc = snr_sc(channel, np.ones(num_ue), power_noise(total_bandwidth))
+    egc = snr_egc(channel, amp, np.ones(num_ue), power_noise(total_bandwidth))
+    mrc = snr_mrc(channel, np.ones(num_ue), power_noise(total_bandwidth))
 
-    total_snr_sc[:, seed] = lin2db(snr)
-    total_snr_egc[:, seed] = lin2db(snr_)
-    total_snr_mrc[:, seed] = lin2db(snr__)
+    total_snr_sc[:, seed] = lin2db(sc)
+    total_snr_egc[:, seed] = lin2db(egc)
+    total_snr_mrc[:, seed] = lin2db(mrc)
 
 
 # Plotting
@@ -63,5 +63,3 @@ plt.ylabel('eCDF')
 plt.legend()
 plt.grid()
 plt.show()
-
-plt.save_fig('combiner_eCDF.pdf')
