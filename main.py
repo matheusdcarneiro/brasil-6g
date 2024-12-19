@@ -36,16 +36,23 @@ for seed in range(seeds):
     dis = distance(ue_pos, ap_pos)
 
     # Channel coefficient
-    channel, phases, amp = generate_channel(dis, std_s, std_m, k, n, num_ue, num_ap, num_ant) 
+    channel, phases, amp = generate_channel(dis, std_s, std_m, k, n, num_ue, num_ap, num_ant)
 
     # SNR with combination by selection
     sc = snr_sc(channel, np.ones(num_ue), power_noise(total_bandwidth))
     egc = snr_egc(channel, amp, np.ones(num_ue), power_noise(total_bandwidth))
     mrc = snr_mrc(channel, np.ones(num_ue), power_noise(total_bandwidth))
 
+<<<<<<< HEAD
     total_snr_sc[:, seed] = lin2db(sc)
     total_snr_egc[:, seed] = lin2db(egc)
     total_snr_mrc[:, seed] = lin2db(mrc)
+=======
+    total_snr_sc[:, seed] = lin2db(snr)
+    total_snr_egc[:, seed] = lin2db(snr_)
+    total_snr_mrc[:, seed] = lin2db(snr__)
+    
+>>>>>>> 201359001f725ebdef71d677bbf4629ed8e66b9b
 
 
 # Plotting
