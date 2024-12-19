@@ -55,4 +55,4 @@ def add_noise(symbols, n_std):
     # Add noise to the symbols
     r_symbols = symbols + noise
 
-    return r_symbols
+    return np.exp(1j * np.angle(r_symbols))
